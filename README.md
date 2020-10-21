@@ -38,8 +38,8 @@ python>=           3.5
  按照城市的density和migration文件分析人口流量管制情况（有无交通管制），对城市区域按照后续趋势进行划分城市  
  ①	 前期受到交通管制：A，B ，C，F ，I，J，k  
  ②	 前期没有受到交通管制：，D，E，G，H  
- <img src="https://github.com/zhuwanling/2020-Baidu-Big-Data-Competition/blob/main/Image/%E5%9B%BE%E7%89%872.png" width="600" height="300"  align=center />   
- <img src="https://github.com/zhuwanling/2020-Baidu-Big-Data-Competition/blob/main/Image/%E5%9B%BE%E7%89%873.png" width="500" height="300"  align=center />   
+ <img src="https://github.com/zhuwanling/2020-Baidu-Big-Data-Competition/blob/main/Image/%E5%9B%BE%E7%89%872.png" width="450" height="200"  align=center />   
+ 　　　　<img src="https://github.com/zhuwanling/2020-Baidu-Big-Data-Competition/blob/main/Image/%E5%9B%BE%E7%89%873.png" width="300" height="200"  align=center />   
 　　针对①设计了code_78_128_55xgb模型，针对②设计了code188lag45wow8xgb模型。为微调优化线上结果，为F城市微调出code78_128的xgb模型，c城市微调出chengxun的xgb模型,GH城市微调出code188的xgb模型，以最终得到Xgboost的预测结果。微调部分模型结果对整体提升比较小。整体拓展可以使用针对①设计的code_78_128_55xgb模型，针对②设计的code188lag45wow8xgb模型为主。  
   
 #### xgb特征设计：
