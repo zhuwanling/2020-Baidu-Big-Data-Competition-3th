@@ -29,7 +29,7 @@ python>=           3.5
 主要分为两个模块，将预测分为:   
 * lstm进行近期预测 
 * Xgbosst进行长期预测
-
+<img src="https://github.com/zhuwanling/2020-Baidu-Big-Data-Competition/blob/main/Image/%E5%9B%BE%E7%89%871.png" width="600" height="400" alt="框架图"  align=center />  
 ### Xgboost长期预测 
  按照城市的density文件分析人口流量管制情况（有无交通管制），对城市区域按照后续趋势进行划分城市  
  ①	后续趋于0：A，B ，C，F ，I，J，k   
