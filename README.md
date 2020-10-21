@@ -31,6 +31,7 @@ python>=           3.5
 * Xgbosst进行长期预测
 
 　　结合LSTM和XGBOOST模型分别进行短期和长期预测，通过分析迁移数据区分管制和非管制城市，分别对管制和非管制城市进行建模，特对需要在于lagging特征的使用，进行处理特别是结合潜伏期的环比lagging特征  
+  
 <img src="https://github.com/zhuwanling/2020-Baidu-Big-Data-Competition/blob/main/Image/%E5%9B%BE%E7%89%871.png" width="500" height="300"  align=center />    
 
 ###  Xgboost长期预测   
@@ -40,8 +41,8 @@ python>=           3.5
 　　针对①设计了code_78_128_55xgb模型，针对②设计了code188lag45wow8xgb模型。为微调优化线上结果，为F城市微调出code78_128的xgb模型，c城市微调出chengxun的xgb模型,GH城市微调出code188的xgb模型，以最终得到Xgboost的预测结果。微调部分模型结果对整体提升比较小。整体拓展可以使用针对①设计的code_78_128_55xgb模型，针对②设计的code188lag45wow8xgb模型为主。  
   
 #### xgb特征设计：
-Xgb时间序列自回归模型部分：
-Y(t)=a*Y(t-1)+ b*Y(t-2),其中Y(t-1)为Y在t-1时刻的值, 而 Y(t-2)为Y在t-2时刻的值, 换句话说, 现在的Y值由过去的Y值决定, 因此自变量和因变量都为自身.构建Y(t)=a*Y(t-1)+ b*Y(t-2)+.., 但并不是用的线性模型, 用的是基于树的非线性模型, 比如梯度提升树。
+Xgb时间序列自回归模型部分：  
+　　Y(t)=a*Y(t-1)+ b*Y(t-2),其中Y(t-1)为Y在t-1时刻的值, 而 Y(t-2)为Y在t-2时刻的值, 换句话说, 现在的Y值由过去的Y值决定, 因此自变量和因变量都为自身.构建Y(t)=a*Y(t-1)+ b*Y(t-2)+.., 但并不是用的线性模型, 用的是基于树的非线性模型, 比如梯度提升树。
 与时间相关的特征
 1.	lagging特征: 我们的主要目的是通过前几天的infectnum来预测下一个时刻的infectnum，那么就需要构造lagging特征，lagging的个数我们取45,  也就是用lagging1, lagging2, lagging3, lagging4 和lagging5，...，lagging45来预测现在第T天的infectnum，其中lagging1表示t-1时刻的travel_time, 以此类推．通过pandas的表连接操作，我们能很容易构造出来。通过代码运行后得到的文件会在data_process文件下。
 2.	基本统计特征:基本的统计特征有很多，比如infectnum的均值，方差，最大值，最小值，偏差，峰度，四分位数等特征。这些都是作为基本的统计特征。
@@ -72,15 +73,15 @@ Xgb参数：
 　　　　'reg_alpha': 1,#2  
 　　　　'gamma': 0.19  
 　　　}  
-微调部分:
-	主要是根据上两版本代码进行微调参数以适应对应城市，F城市微调出code78_128的xgb模型，c城市微调出chengxun的xgb模型,GH城市微调出code188的xgb模型。
+微调部分:  
+　　主要是根据上两版本代码进行微调参数以适应对应城市，F城市微调出code78_128的xgb模型，c城市微调出chengxun的xgb模型,GH城市微调出code188的xgb模型。
 ### LSTM短期预测
 　　为利用多个时间序列特征，我们采用LSTM模型根据前60天的多个时间序列特征来预测未来五天的感染人数增减情况。运用infectnum, migration，transfer, density等多个时间序列特征。参考文献1进行实现。  
 特征设计：  
 　　['cityname', 'region_ID', 'data','infectnum', 'infectnum_mean', 'infectnum_max', 'infectnum_sum',   
 　　'infectnum_min', 'infectnum_median', 'infectnum_std', 'infectnum_skew', 'infectnum_kurt',   
 　　'infectnum_quantile_25', 'infectnum_quantile_75', 'migration', 'density', 'transfer']  
-训练轮次：10000epoch　　
+训练轮次：10000epoch  
 最后将LSTM的预测与xgb的预测按照权重进行融合。　　
 
 
