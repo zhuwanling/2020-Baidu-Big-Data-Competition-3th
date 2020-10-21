@@ -14,7 +14,7 @@ Topic-Forecasting the future incidence of highly pathogenic contagious diseases
 ## 链接：
 答辩PPT ： https://pan.baidu.com/s/1q9UTO6zIkMip2JVIs_eKYA  提取密码：j9fx    
 方案讲解：   
-竞赛故事：   
+竞赛故事： https://blog.csdn.net/wangxiaai/article/details/109209211
 
 ## Packages
 
